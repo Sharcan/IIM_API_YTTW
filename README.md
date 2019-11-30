@@ -4,5 +4,5 @@ Projet reposant sur les APIs suivantes:
 -Youtube API  
 -Twitch API  
 
-# Developper par:
+# Developpé par:
 Nicolas Brazzolotto - A2DW2
