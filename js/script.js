@@ -1,4 +1,4 @@
-console.log('Bonsoir3');
+// console.log('Bonsoir3');
 
 
 
@@ -18,7 +18,7 @@ function getApiDataDaily() {
                 let imgDaily = data.list[i].thumbnail_large_url;
                 // console.log(imgDaily);
                 let titleDaily = getTitleData(i);
-                document.querySelector('.dailyVideo').innerHTML += '<div class="col-sm-3 text-center"><img width="300" src="'+ imgDaily +'" alt="miniature"><h6>'+ titleDaily +'</h6></div>';
+                // document.querySelector('.dailyVideo').innerHTML += '<div class="col-sm-3 text-center"><img width="300" src="'+ imgDaily +'" alt="miniature"><h6>'+ titleDaily +'</h6></div>';
             }
             
         }
@@ -41,12 +41,15 @@ function getTitleData(place) {
     xhrThumb.onreadystatechange = function() {
         if(xhrThumb.readyState === 4){
             const results = JSON.parse(xhrThumb.responseText);
-            // console.log(results);
+            console.log(results);
             
             const title = results.list[place].title;
+            const id = results.list[place].id;
+            document.querySelector('.dailyVideo').innerHTML += '<div class="col-sm-3"><a href="video.html?idDaily='+ id +'"><h6>'+ title +'</h6></a></div>';
             
-            console.log('titre: ',title);
-            return 'title';
+            // console.log('titre: ',title);
+            return title;
+
         }
     };
     
@@ -73,8 +76,9 @@ function getApiDataYT() {
             for(let i = 0; i<listLength; i++){
                 const imgYT = data.items[i].snippet.thumbnails.medium.url;
                 const titleYT = data.items[i].snippet.title;
+                const idChannel = data.items[i].id;
                 // const descriptionYT = data.items[i].snippet.description;
-                document.querySelector('.video').innerHTML += '<div class="col-sm-3 text-center"><img width="300" src="'+ imgYT +'" alt="miniature"></br><h6>'+ titleYT +'</h6></div>';
+                document.querySelector('.video').innerHTML += '<div class="col-sm-3 text-justify"><a href="video.html?idYT='+ idChannel +'"><img width="300" src="'+ imgYT +'" alt="miniature"><h6>'+ titleYT +'</h6></a></div>';
             }
 
 
