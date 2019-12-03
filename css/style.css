@@ -1,0 +1,13 @@
+body{
+    background-color: #1f1f1f;
+    color: white;
+}
+
+.navbar{
+    background-color: #282828;
+}
+
+h2{
+    /* font-size: xx-large; */
+    padding: 2%;
+}
