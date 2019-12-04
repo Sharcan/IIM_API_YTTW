@@ -10,15 +10,17 @@ function getApiDataDaily() {
 
         if(xhr.readyState === 4){
             const data = JSON.parse(xhr.responseText);
-            // console.log(data);
+            console.log(data);
 
             const itemsList = data.list.length;
 
             for(let i = 0; i< itemsList; i++){
-                let imgDaily = data.list[i].thumbnail_large_url;
-                // console.log(imgDaily);
-                let titleDaily = getTitleData(i);
-                // document.querySelector('.dailyVideo').innerHTML += '<div class="col-sm-3 text-center"><img width="300" src="'+ imgDaily +'" alt="miniature"><h6>'+ titleDaily +'</h6></div>';
+                let imgDaily = data.list[i].thumbnail_720_url;
+                let titleDaily = data.list[i].title;
+                let idDaily = data.list[i].id;
+                console.log(idDaily);
+
+                document.querySelector('.dailyVideo').innerHTML += '<div class="col-sm-3 text-center" id="video"><a href="video.html?idDaily='+ idDaily +'"><img width="400" height="200" src="'+ imgDaily +'" alt="miniature"><h6>'+ titleDaily +'</h6></a></div>';
             }
             
         }
@@ -27,7 +29,7 @@ function getApiDataDaily() {
     
     
     
-    xhr.open('GET', 'https://api.dailymotion.com/videos?country=FR&fields=thumbnail_large_url');
+    xhr.open('GET', 'https://api.dailymotion.com/videos?fields=title%2Cthumbnail_720_url%2Cid');
     xhr.send();
     
     
@@ -41,7 +43,7 @@ function getTitleData(place) {
     xhrThumb.onreadystatechange = function() {
         if(xhrThumb.readyState === 4){
             const results = JSON.parse(xhrThumb.responseText);
-            console.log(results);
+            // console.log(results);
             
             const title = results.list[place].title;
             const id = results.list[place].id;
@@ -56,6 +58,15 @@ function getTitleData(place) {
     xhrThumb.open('GET', 'https://api.dailymotion.com/videos?country=FR');
     xhrThumb.send();
 }
+
+
+
+
+
+
+
+
+
 
 
 
@@ -78,7 +89,7 @@ function getApiDataYT() {
                 const titleYT = data.items[i].snippet.title;
                 const idChannel = data.items[i].id;
                 // const descriptionYT = data.items[i].snippet.description;
-                document.querySelector('.video').innerHTML += '<div class="col-sm-3 text-justify"><a href="video.html?idYT='+ idChannel +'"><img width="300" src="'+ imgYT +'" alt="miniature"><h6>'+ titleYT +'</h6></a></div>';
+                document.querySelector('.video').innerHTML += '<div class="col-sm-3 text-justify" id="video"><a href="video.html?idYT='+ idChannel +'"><img width="400" src="'+ imgYT +'" alt="miniature"><h6>'+ titleYT +'</h6></a></div>';
             }
 
 

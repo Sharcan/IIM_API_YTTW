@@ -11,3 +11,20 @@ h2{
     /* font-size: xx-large; */
     padding: 2%;
 }
+
+
+#video{
+    /* width: 100px; */
+    margin: 1% 0;
+    
+}
+
+.video a{
+    color: white;
+    text-decoration: none;
+}
+
+.dailyVideo a{
+    color: white;
+    text-decoration: none;
+}

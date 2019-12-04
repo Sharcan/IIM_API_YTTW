@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/video.css">
     <title>Document</title>
 </head>
 <body>
@@ -39,18 +40,21 @@
     
     <div class="container-fluid">
         <div class="row">
-            <div class="card" style="width: 70%;">
+            <div class="card" style="width: 80%;">
                 <div class="row no-gutters">
                     <div class="col-sm-4" id="miniature">
                         
                     </div>
-                    <div class="col-sm-4">
-                        <div class="card-body text-dark" id="body">
+                    <div class="col-sm-8">
+                        <div class="card-body text-dark font-weight-bold" id="body">
                             
                         </div>
-                        <div class="card-footer text-dark" id="footer">
-
-                        </div>
+                    </div>
+                    <button class="btn btn-primary" onclick="addContent()" id="add">Voir plus d'informations</button>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-info" id="footer">
+                        <h3>Informations supplémentaires:</h3>
                     </div>
                 </div>
             </div>
