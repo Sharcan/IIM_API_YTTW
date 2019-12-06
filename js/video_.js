@@ -9,11 +9,13 @@ function wichId() {
     if(isThere){
         const id = urlParam.substr(6);
         getChannelYtData(id);
+        getMoreVideoYT(id);
         
     }
     else{
         const id = urlParam.substr(9);
         getInformationDaily(id);
+        getMoreVideoDaily(id);
         
     }
 }
@@ -37,13 +39,76 @@ function getChannelYtData(id) {
 }
 
 
+function getMoreVideoYT(id){
+
+    const xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4){
+            const data = JSON.parse(xhr.responseText);
+            console.log(data);
+
+            const listLength = data.items.length;
+            for(let i = 0; i<listLength; i++){
+                const moreTitleVideo = data.items[i].snippet.title;
+                const moreImageVideo = data.items[i].snippet.thumbnails.high.url;
+                const moreId = data.items[i].id.videoId;
+                console.log(moreId);
+
+                document.getElementById('moreVideo').innerHTML += '<div class="col-sm-4"><a href="video.html?idYT='+ moreId +'"><img width="400" src="'+ moreImageVideo +'" alt="miniature"><h6>'+ moreTitleVideo +'</h6></a></div>';
+            }
+            
+        }
+        
+        
+    }
+    
+    
+    
+    xhr.open('GET', 'https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId='+ id +'&type=video&key=AIzaSyCiWX29S3HcNWEd6uCy21HXZ3iMEpxK6cs');
+    xhr.send();
+}
+
+
+function getMoreVideoDaily(id){
+    const xhr = new XMLHttpRequest();
+
+    xhr.onreadystatechange = function() {
+        if(xhr.readyState === 4){
+            const data = JSON.parse(xhr.responseText);
+            // console.log(data);
+
+            const listLength = data.list.length;
+            for(let i = 0; i<listLength; i++){
+                const moreTitleVideo = data.list[i].title;
+                const moreImageVideo = data.list[i].thumbnail_1080_url;
+                const moreId = data.list[i].id;
+                
+
+                document.getElementById('moreVideo').innerHTML += '<div class="col-sm-4"><a href="video.html?idDaily='+ moreId +'"><img width="400" src="'+ moreImageVideo +'" alt="miniature"><h6>'+ moreTitleVideo +'</h6></a></div>';
+            }
+            
+        }
+        
+        
+    }
+    
+    
+    
+    xhr.open('GET', 'https://api.dailymotion.com/video/'+ id +'/related?fields=title%2Cthumbnail_1080_url%2Cid');
+    xhr.send();
+}
+
+
+
+
 function getInformationDaily(id){
     const xhr = new XMLHttpRequest();
     
     xhr.onreadystatechange = function() {
         if(xhr.readyState === 4){
             const data = JSON.parse(xhr.responseText);
-            console.log(data);
+            // console.log(data);
             templateDaily(data);
             
         }
@@ -73,6 +138,8 @@ function templateYT(data){
     const like = data.items[0].statistics.likeCount;
     document.getElementById('footer').innerHTML += `<ul><li>${commentVideo} commentaires</li><li>${viewVideo} vues</li><li>${like} likes</li></ul>`;
     
+
+
 }
 
 
