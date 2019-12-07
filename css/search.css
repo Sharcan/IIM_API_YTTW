@@ -1,0 +1,32 @@
+
+#title{
+    margin: 1% 0;
+}
+
+#channelYT{
+    margin: 1% 0%;
+
+}
+
+#channel{
+    margin: 1% 0;
+}
+
+#channelYT img{
+    border-radius: 50%;
+    margin: 0 1%;
+}
+
+
+#video{
+    margin: 1% 0 !important; 
+}
+#video a{
+    color: white;
+    text-decoration: none;
+    
+}
+
+/* hr{
+    border-top: 1px solid white;
+} */

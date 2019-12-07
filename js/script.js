@@ -10,7 +10,7 @@ function getApiDataDaily() {
 
         if(xhr.readyState === 4){
             const data = JSON.parse(xhr.responseText);
-            console.log(data);
+            // console.log(data);
 
             const itemsList = data.list.length;
 
@@ -18,7 +18,7 @@ function getApiDataDaily() {
                 let imgDaily = data.list[i].thumbnail_720_url;
                 let titleDaily = data.list[i].title;
                 let idDaily = data.list[i].id;
-                console.log(idDaily);
+                // console.log(idDaily);
 
                 document.querySelector('.dailyVideo').innerHTML += '<div class="col-sm-3 text-center" id="video"><a href="video.html?idDaily='+ idDaily +'"><img width="400" height="200" src="'+ imgDaily +'" alt="miniature"><h6>'+ titleDaily +'</h6></a></div>';
             }
@@ -104,6 +104,18 @@ function getApiDataYT() {
     xhr.open('GET', 'https://www.googleapis.com/youtube/v3/videos?part=snippet%2CcontentDetails%2Cstatistics&chart=mostPopular&regionCode=FR&key=AIzaSyCiWX29S3HcNWEd6uCy21HXZ3iMEpxK6cs&maxResults=12');
     xhr.send();
 }
+
+
+
+document.getElementById('search').addEventListener('click', function(){
+
+    const value = document.getElementById('content').value;
+    
+    document.location.href= "search.html?search="+value;
+
+});
+
+
 
 
 getApiDataYT();

@@ -1,5 +1,5 @@
 
-console.log('Ah oui ?');
+// console.log('Ah oui ?');
 
 
 function wichId() {
@@ -85,7 +85,7 @@ function getMoreVideoDaily(id){
                 const moreId = data.list[i].id;
                 
 
-                document.getElementById('moreVideo').innerHTML += '<div class="col-sm-4"><a href="video.html?idDaily='+ moreId +'"><img width="400" src="'+ moreImageVideo +'" alt="miniature"><h6>'+ moreTitleVideo +'</h6></a></div>';
+                document.getElementById('moreVideo').innerHTML += '<div class="col-sm-4"><a href="video.html?idDaily='+ moreId +'"><img width="400" height="200" src="'+ moreImageVideo +'" alt="miniature"><h6>'+ moreTitleVideo +'</h6></a></div>';
             }
             
         }
@@ -181,6 +181,15 @@ function addContent(){
         verif = false;  
     }
 }
+
+
+document.getElementById('search').addEventListener('click', function(){
+
+    const value = document.getElementById('content').value;
+    
+    document.location.href= "search.html?search="+value;
+
+});
 
 
 //Lancement des Apis
