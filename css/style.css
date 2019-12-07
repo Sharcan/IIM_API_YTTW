@@ -8,14 +8,13 @@ body{
 }
 
 h2{
-    /* font-size: xx-large; */
-    padding: 2%;
+    margin-top: 2%;
 }
 
 
 #video{
     /* width: 100px; */
-    margin: 1% 0S;
+    margin: 2% 0;
     
 }
 

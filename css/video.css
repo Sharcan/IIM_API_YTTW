@@ -10,3 +10,9 @@
 #moreVideo{
     margin-top: 2%;
 }
+
+
+#moreVideo a{
+    color: white;
+    text-decoration: none;
+}

@@ -1,5 +1,5 @@
 
-
+console.log('Ah oui ?');
 
 
 function wichId() {
@@ -95,7 +95,7 @@ function getMoreVideoDaily(id){
     
     
     
-    xhr.open('GET', 'https://api.dailymotion.com/video/'+ id +'/related?fields=title%2Cthumbnail_1080_url%2Cid');
+    xhr.open('GET', 'https://api.dailymotion.com/video/'+ id +'/related?fields=title%2Cthumbnail_1080_url%2Cid&limit=5');
     xhr.send();
 }
 
