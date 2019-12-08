@@ -1,11 +1,13 @@
 
-
+//On récupère via ces deux variables la donnée envoyé dans l'URL
 const urlParam = location.search;
 const searchName = urlParam.substr(8);
 // console.log(searchName);
 
 
 
+
+//On récupère ici les vidéos dailymotion qui sont en lien avec la recherche
 function getApiDataDaily(name) {
     const xhr = new XMLHttpRequest();
 
@@ -19,13 +21,15 @@ function getApiDataDaily(name) {
 
             const listLength = data.list.length;
             const result = data.list;
+
+            //on affiche les résultats avec la boucle for.
             for(let j=0; j<listLength; j++){
                 const titleDaily = result[j].title;
                 const imgDaily = result[j].thumbnail_1080_url;
                 const idDaily = result[j].id;
 
-                //IMPOSSIBLE DE RECUPERER LES DONNEES...
-                // const channelName = result[j].username;
+                //IMPOSSIBLE DE RECUPERER CES DONNEES...
+                // const channelName = result[j].owner.username;
                 // const channelImgDaily = result[j].owner.avatar_720_url;
 
                 document.getElementById('videoDaily').innerHTML += '<div class="col-sm-3" id="video"><a href="video.html?idDaily='+ idDaily +'"><img width="400" height="200" src="'+ imgDaily +'"><h6>'+ titleDaily +'</h6></a></div>';
@@ -39,6 +43,7 @@ function getApiDataDaily(name) {
 }
 
 
+//On récupère ici les vidéos youtube qui sont en lien avec la recherche
 function getApiDataYT(name) {
     const xhr = new XMLHttpRequest();
 
@@ -52,14 +57,17 @@ function getApiDataYT(name) {
             const listLength = data.items.length;
             for(let i =0; i<listLength; i++){
 
+                //Etant donnée, que l'api youtube retourne des chaines et des vidéos, il faut dissocier les deux.
                 const verif= data.items[i].id.kind;
                 if(verif === "youtube#video"){
+                    //Ici on ne récupère que les vidéos
                     const titleYT = data.items[i].snippet.title;
                     const imgYT = data.items[i].snippet.thumbnails.medium.url;
                     const idYT = data.items[i].id.videoId;
                     document.getElementById('videoYT').innerHTML += '<div class="col-sm-3 text-justify" id="video"> <a href="video.html?idYT='+ idYT +'"><img width="400" src="'+ imgYT +'" alt="miniature"><h6>'+ titleYT +'</h6></a> </div>';
                 }
                 else{
+                    //Ici on récupère les chaines
                     const channelYT = data.items[i].snippet.channelTitle;
                     const channelDescription = data.items[i].snippet.description;
                     const channelImg = data.items[i].snippet.thumbnails.default.url;
@@ -78,7 +86,7 @@ function getApiDataYT(name) {
 }
 
 
-
+//Si l'utilisateur effectue une recherche
 document.getElementById('search').addEventListener('click', function(){
 
     const value = document.getElementById('content').value;
@@ -88,6 +96,7 @@ document.getElementById('search').addEventListener('click', function(){
 });
 
 
+//On lance ici les appelle aux API avec comme paramètre la valeur de l'URL
 getApiDataYT(searchName);
 getApiDataDaily(searchName);
 

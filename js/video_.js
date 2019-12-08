@@ -1,7 +1,9 @@
 
 // console.log('Ah oui ?');
 
-
+//Comme les id des videos ont une structure différente entre dailymotion et youtube
+//Je sépare le resultat de la recherche grâce au nom du paramètre: "idYT" ou "idDaily"
+//En fonction du paramètre on appelle une certaine API.
 function wichId() {
     const urlParam = location.search;
     const isThere = urlParam.includes("idYT");
@@ -20,7 +22,7 @@ function wichId() {
     }
 }
 
-
+//On récupère les informations de la vidéos youtube qui correspond à l'id
 function getChannelYtData(id) {
     const xhr = new XMLHttpRequest();
     
@@ -28,6 +30,7 @@ function getChannelYtData(id) {
         if(xhr.readyState === 4){
             const data = JSON.parse(xhr.responseText);
             // console.log(data);
+            //Les informations récupérés sont envoyé à une seconde fonction pour les mettre en place.
             templateYT(data);
         }
         
@@ -39,6 +42,7 @@ function getChannelYtData(id) {
 }
 
 
+//On récupère ici, d'autres vidéos qui sont en lien avec l'id récupérée.
 function getMoreVideoYT(id){
 
     const xhr = new XMLHttpRequest();
@@ -49,6 +53,8 @@ function getMoreVideoYT(id){
             console.log(data);
 
             const listLength = data.items.length;
+
+            //Ces vidéos sont directement affichés dans le code HTML
             for(let i = 0; i<listLength; i++){
                 const moreTitleVideo = data.items[i].snippet.title;
                 const moreImageVideo = data.items[i].snippet.thumbnails.high.url;
@@ -69,7 +75,7 @@ function getMoreVideoYT(id){
     xhr.send();
 }
 
-
+//On récupère ici, d'autres vidéos qui sont en lien avec l'id récupérée.
 function getMoreVideoDaily(id){
     const xhr = new XMLHttpRequest();
 
@@ -79,6 +85,7 @@ function getMoreVideoDaily(id){
             // console.log(data);
 
             const listLength = data.list.length;
+            //Ces vidéos sont directement affichés dans le code HTML
             for(let i = 0; i<listLength; i++){
                 const moreTitleVideo = data.list[i].title;
                 const moreImageVideo = data.list[i].thumbnail_1080_url;
@@ -101,7 +108,7 @@ function getMoreVideoDaily(id){
 
 
 
-
+//On récupère les informations de la vidéo dailymotion qui correspond à l'id
 function getInformationDaily(id){
     const xhr = new XMLHttpRequest();
     
@@ -109,6 +116,7 @@ function getInformationDaily(id){
         if(xhr.readyState === 4){
             const data = JSON.parse(xhr.responseText);
             // console.log(data);
+            //Les informations récupérés sont envoyé à une seconde fonction pour les mettre en place.
             templateDaily(data);
             
         }
@@ -121,6 +129,8 @@ function getInformationDaily(id){
 }
 
 
+
+//on met ici en place les informations récupérés plus haut
 function templateYT(data){
     
     
@@ -143,7 +153,7 @@ function templateYT(data){
 }
 
 
-
+//on met ici en place les informations récupérés plus haut
 function templateDaily(data){
     
     const imgVideo = data.thumbnail_720_url;
@@ -162,6 +172,10 @@ function templateDaily(data){
 
 
 
+
+
+//Pour ne pas surcharger la page, j'ai rajouté cette fonction qui permet d'agrandir la "card Bootstrap"
+//et d'afficher d'avantage d'informations
 
 let verif = false;
 function addContent(){
@@ -182,7 +196,7 @@ function addContent(){
     }
 }
 
-
+//Si l'utilisateur effectue une recherche
 document.getElementById('search').addEventListener('click', function(){
 
     const value = document.getElementById('content').value;
